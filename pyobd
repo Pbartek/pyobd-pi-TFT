@@ -40,6 +40,7 @@ import webbrowser #open browser from python
 
 from obd2_codes import pcodes
 from obd2_codes import ptest
+from obd_utils import scanSerial
 
 from wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
 
@@ -599,59 +600,12 @@ the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  0211
         self.ThreadControl=1
         self.nb.SetSelection(3)
         
-    
-    def scanSerial(self):
-        """scan for available ports. return a list of serial names"""
-        available = []
-        for i in range(256):
-          try: #scan standart ttyS*
-            s = serial.Serial(i)
-            available.append(s.portstr)
-            s.close()   # explicit close 'cause of delayed GC in java
-          except serial.SerialException:
-            pass
-        for i in range(256):
-          try: #scan USB ttyACM
-            s = serial.Serial("/dev/ttyACM"+str(i))
-            available.append(s.portstr)
-            s.close()   # explicit close 'cause of delayed GC in java
-          except serial.SerialException:
-            pass
-        for i in range(256):
-          try:
-            s = serial.Serial("/dev/ttyUSB"+str(i))
-            available.append(s.portstr)
-            s.close()   # explicit close 'cause of delayed GC in java
-          except serial.SerialException:
-            pass
-        for i in range(256):
-          try:
-            s = serial.Serial("/dev/ttyd"+str(i))
-            available.append(s.portstr)
-            s.close()   # explicit close 'cause of delayed GC in java
-          except serial.SerialException:
-            pass
-            
-        # ELM-USB shows up as /dev/tty.usbmodemXXXX, where XXXX is a changing hex string
-        # on connection; so we have to search through all 64K options
-        if len(platform.mac_ver()[0])!=0:  #search only on MAC
-          for i in range (65535):
-            extension = hex(i).replace("0x","", 1)
-            try:
-              s = serial.Serial("/dev/tty.usbmodem"+extension)
-              available.append(s.portstr)
-              s.close()
-            except serial.SerialException:
-              pass 
-        
-        return available
-
     def Configure(self,e = None):
         id = 0
         diag = wx.Dialog(self.frame, id, title="Configure")
         sizer = wx.BoxSizer(wx.VERTICAL)
         
-        ports = self.scanSerial()
+        ports = scanSerial()
         rb = wx.RadioBox(diag, id, "Choose Serial Port",
                         choices = ports, style = wx.RA_SPECIFY_COLS,
                         majorDimension = 2)
