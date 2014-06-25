@@ -37,23 +37,16 @@ We'll be doing this from a console cable connection, but you can just as easily 
 Before proceeding, run:
 
 sudo apt-get update
-
 sudo apt-get upgrade
-
 sudo apt-get autoremove
-
 sudo reboot
 
 Install these components using the command:
 
 sudo apt-get install python-serial
-
 sudo apt-get install bluetooth bluez-utils blueman
-
 sudo apt-get install python-wxgtk2.8 python-wxtools wx2.8-i18n libwxgtk2.8-dev
-
 sudo apt-get install git-core
-
 sudo reboot 
 
 Next, download the OBD-Pi Software direct from GitHub (https://github.com/Pbartek/pyobd.git)
@@ -61,7 +54,6 @@ Next, download the OBD-Pi Software direct from GitHub (https://github.com/Pbarte
 Or using the command:
 
 cd ~
-
 git clone https://github.com/Pbartek/pyobd.git
 
 Vechicle Installation
@@ -88,9 +80,7 @@ startx
 8. Open up Terminal and run:
 
 cd pyobd
-
 sudo su
-
 python obd_gui.py
 
 Use the Left and Right arrow key to cycle through the gauge display.
