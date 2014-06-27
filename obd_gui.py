@@ -225,7 +225,7 @@ class OBDPanelGauges(wx.Panel):
             self.texts.append(t1)
 
             # Text for sensor name
-            t2 = wx.StaticText(parent=self, label=name, style=wx.ALIGN_CENTER)
+            t2 = wx.StaticText(parent=self, label=unit+"\n"+name, style=wx.ALIGN_CENTER)
             t2.SetForegroundColour('WHITE')
             font2 = wx.Font(13, wx.ROMAN, wx.NORMAL, wx.BOLD, faceName="Monaco")
             t2.SetFont(font2)
