@@ -20,7 +20,7 @@ from obd_sensors import *
 
 # OBD variable
 BACKGROUND_FILENAME = "bg_black.jpg"
-GAUGE_FILENAME		= "frame_C1.jpg"
+GAUGE_FILENAME		= "frame_S1.jpg"
 LOGO_FILENAME 		= "cowfish.png"
 
 #-------------------------------------------------------------------------------
@@ -219,18 +219,18 @@ class OBDPanelGauges(wx.Panel):
                 value = str("%.2f"%round(value, 3))                    
             t1 = wx.StaticText(parent=self, label=str(value), style=wx.ALIGN_CENTER)
             t1.SetForegroundColour('WHITE')
-            font1 = wx.Font(30, wx.ROMAN, wx.NORMAL, wx.NORMAL, faceName="Monaco")
+            font1 = wx.Font(53, wx.ROMAN, wx.NORMAL, wx.NORMAL, faceName="Monaco")
             t1.SetFont(font1)
-            boxSizer.Add(t1, 0, wx.ALIGN_CENTER | wx.ALL, 70)
+            boxSizer.Add(t1, 0, wx.ALIGN_CENTER | wx.ALL, 50)
             boxSizer.AddStretchSpacer()
             self.texts.append(t1)
 
             # Text for sensor name
             t2 = wx.StaticText(parent=self, label=name, style=wx.ALIGN_CENTER)
             t2.SetForegroundColour('WHITE')
-            font2 = wx.Font(10, wx.ROMAN, wx.NORMAL, wx.BOLD, faceName="Monaco")
+            font2 = wx.Font(20, wx.ROMAN, wx.NORMAL, wx.BOLD, faceName="Monaco")
             t2.SetFont(font2)
-            boxSizer.Add(t2, 0, wx.ALIGN_CENTER | wx.ALL, 45)
+            boxSizer.Add(t2, 0, wx.ALIGN_CENTER | wx.ALL, 15)
             self.texts.append(t2)
             gridSizer.Add(boxSizer, 1, wx.EXPAND | wx.ALL)
 
@@ -252,7 +252,7 @@ class OBDPanelGauges(wx.Panel):
         # Timer for update
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.refresh, self.timer)
-        self.timer.Start(1500)
+        self.timer.Start(1000)
 
 
     def refresh(self, event):
