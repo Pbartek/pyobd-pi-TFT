@@ -95,7 +95,7 @@ class OBD_Recorder():
         
 username = getpass.getuser()  
 logitems = ["rpm", "speed", "throttle_pos", "load", "fuel_status"]
-o = OBD_Recorder('/home/'+username+'/pyobd/log/', logitems)
+o = OBD_Recorder('/home/'+username+'/pyobd-pi/log/', logitems)
 o.connect()
 
 if not o.is_connected():
